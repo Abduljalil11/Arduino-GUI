@@ -27,14 +27,14 @@ SerialPort.list().then(function(ports){
             parser.on('data', (data)=>{
                 const arr = data.split(" ")
                 io.emit('arr', arr)
-                var plotly = require("plotly")("Abduljalil11", "lQFhGtEgAsQlef3ju1MB")
-                var info = [{y:[data[0]], type: "line"}];
-                var layout = {fileopt : "overwrite", filename : "live graph"};
+                // var plotly = require("plotly")("Abduljalil11", "lQFhGtEgAsQlef3ju1MB")
+                // var info = [{y:[data[0]], type: "line"}];
+                // var layout = {fileopt : "overwrite", filename : "live graph"};
 
-                plotly.plot(info, layout, (err, msg) => {
-                    if (err) return console.log(err);
-                    console.log(msg);
-                })
+                // plotly.plot(info, layout, (err, msg) => {
+                //     if (err) return console.log(err);
+                //     console.log(msg);
+                // })
             })
         }
     })
@@ -45,4 +45,6 @@ SerialPort.list().then(function(ports){
 server.listen(3000, () => {
     console.log('listening on *:3000');
 });
+
+module.exports = app;
 
