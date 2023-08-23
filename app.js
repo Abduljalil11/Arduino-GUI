@@ -43,10 +43,10 @@ SerialPort.list().then(function(ports){
 
 
   
-server.listen(3000, () => {
-    console.log('listening on *:3000');
+server.listen(PORT, () => {
+    console.log('listening on *:3030');
 });
 
-app.listen(PORT, () => {
-    console.log(`server started on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`server started on port ${PORT}`);
+// });
