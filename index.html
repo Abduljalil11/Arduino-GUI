@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&family=Space+Grotesk:wght@500&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+        <!-- <script src="https://cdn.plot.ly/plotly-2.25.2.min.js" charset="utf-8"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>      
+        <style> 
+            :root{
+            --Marine-blue: hsl(213, 96%, 18%);
+            --Purplish-blue: hsl(243, 100%, 62%);
+            --Pastel-blue: hsl(228, 100%, 84%);
+            --Light-blue: hsl(206, 94%, 87%);
+            --Strawberry-red: hsl(354, 84%, 57%);
+            --Cool-gray: hsl(231, 11%, 63%);
+            --Light-gray: hsl(229, 24%, 87%);
+            --Magnolia: hsl(217, 100%, 97%);
+            --Alabaster: hsl(231, 100%, 99%);
+            --White: hsl(0, 0%, 100%);
+            --width: 100%;
+            --ratio: 375/172; 
+            }
+
+            body{
+                height: 100vh;
+                display: flex;
+                background-image: url("images/stackedwave.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            * {
+                box-sizing: border-box;
+                font-family: 'Roboto Slab', serif;
+                font-family: 'Space Grotesk', sans-serif;
+                font-family: 'Ubuntu', sans-serif;
+            }
+
+            main{
+                width: 60%;
+                height: 60%;
+                background-color: transparent;
+                display: grid;
+                grid-template-areas: 'one three three three' 'two three three three';
+                gap:1rem;
+            }
+
+            .items{
+                background-color: white;
+                border-radius: 1rem;
+                padding: 1rem;
+            }
+
+            .values{
+                color: black;
+            }
+
+            .values > div:first-child{
+                height: 10%;
+            }
+
+            .values > div:last-child{
+                text-align: center;
+                height: 90%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .value{
+                width: 12rem;
+            }
+
+            .item-1{
+                grid-area: one;      
+            }
+
+            .item-2{
+                grid-area: two;
+            }
+
+            .item-3{
+                grid-area: three;
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+            }
+
+            span{
+                font-size: 4rem;
+                padding: none;
+                margin: none;
+            }
+        </style>    
+    </head>
+    <body>
+        <main>
+            <div class="items item-1 values">
+                <div>Flow Rate:</div>
+                <div><div class="value"><span class="flow-rate">0.00</span> L/m</div></div>
+            </div>
+            <div class="items item-2 values">
+                <div>volume:</div>
+                <div><div class="value"><span class="volume">0.00</span> L</div></div>
+            </div>
+            <div class="items item-3" id="sample">
+                <div id="Chart"></div>
+            </div> 
+        </main> 
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+            let chart = document.getElementById("chart")
+            socket.on('arr', function(arr) {  
+                document.querySelector('.flow-rate').innerText = arr[0]; 
+                document.querySelector('.volume').innerText = arr[1]; 
+            });
+        </script>   
+    </body>
+</html>
