@@ -6,6 +6,7 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const { SerialPort } = require('serialport');
 const { ReadlineParser } = require('@serialport/parser-readline');
+const PORT = process.env.PORT || 3030;
 
 app.use(express.static(__dirname+'/public'));
 
@@ -46,5 +47,6 @@ server.listen(3000, () => {
     console.log('listening on *:3000');
 });
 
-module.exports = app;
-
+app.listen(PORT, () => {
+    console.log(`server started on port ${PORT}`);
+});
