@@ -28,6 +28,7 @@ SerialPort.list().then(function(ports){
             parser.on('data', (data)=>{
                 const arr = data.split(" ")
                 io.emit('arr', arr)
+                console.log(arr)
                 // var plotly = require("plotly")("Abduljalil11", "lQFhGtEgAsQlef3ju1MB")
                 // var info = [{y:[data[0]], type: "line"}];
                 // var layout = {fileopt : "overwrite", filename : "live graph"};
